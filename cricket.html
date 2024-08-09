@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Game</title>
+    <style>
+        .cricketbat, .cricketball, .cricketwicket {
+            width: 70px;
+            height: 40px;
+            margin: 4px;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>This is the cricket game for fun</h1>
+        <button class="cricketbat" onclick="
+        userchoice = 'bat';
+        computerchoice = choicefun();
+        let getresult = choicefun2(userchoice, computerchoice);
+        show(userchoice, computerchoice, getresult);
+        ">Bat</button>
+
+        <button class="cricketball" onclick="
+        userchoice = 'ball';
+        computerchoice = choicefun();
+        getresult = choicefun2(userchoice, computerchoice);
+        show(userchoice, computerchoice, getresult);
+        ">Ball</button>
+
+        <button class="cricketwicket" onclick="
+        userchoice = 'wicket';
+        computerchoice = choicefun();
+        getresult = choicefun2(userchoice, computerchoice);
+        show(userchoice, computerchoice, getresult);
+        ">Wicket</button>
+    </div>
+    <script>
+        //creating an object 
+        let score = {
+            win : 0,
+            lost : 0,
+            tie : 0,
+            display:function(){
+               return (` win = ${score.win} tie = ${score.tie} lost = ${score.lost} `)
+            }
+        };
+        // Declare variables in the global scope
+        let userchoice;
+        let computerchoice;
+        function choicefun(){
+            let randomChoice = Math.random() * 3;
+            if(randomChoice < 1){
+                return 'bat';
+            } else if(randomChoice >= 1 && randomChoice < 2){
+                return 'ball';
+            } else {
+                return 'wicket';
+            }
+        }
+        function choicefun2(userchoice, computerchoice){
+            if (userchoice === 'bat') {
+                if (computerchoice === 'bat') {
+                    score.tie++;
+                    return 'match drawn';
+                } else if (computerchoice === 'ball') {
+                    score.win++;
+                    return 'you are the winner';
+                } else {
+                    score.lost++;
+                    return 'computer won the match';
+                }
+            } else if (userchoice === 'ball') {
+                if (computerchoice === 'bat') {
+                    score.win++;
+                    return 'you are the winner';
+                } else if (computerchoice === 'ball') {
+                    score.tie++;
+                    return 'match drawn';
+                } else {
+                    score.lost++;
+                    return 'computer won the match';
+                }
+            } else {
+                if (computerchoice === 'bat') {
+                    score.lost++;
+                    return 'computer won the match';
+                } else if (computerchoice === 'ball') {
+                    score.win++;
+                    return 'you are the winner';
+                } else {
+                    score.tie++;
+                    return 'match drawn';
+                }
+            }
+        }
+        function show(userchoice, computerchoice, getresult){
+            alert(`Your choice is ${userchoice} and the computer chose ${computerchoice}.
+            
+            The result is: ${getresult} 
+            
+                    ${score.display()}`);
+        }
+    </script>
+</body>
+</html>
